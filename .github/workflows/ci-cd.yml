@@ -24,7 +24,7 @@ jobs:
       mysql:
         image: mysql:${{ env.MYSQL_VERSION }}
         env:
-          MYSQL_ROOT_PASSWORD: root_password
+          MYSQL_ROOT_PASSWORD: 123456
           MYSQL_DATABASE: test_db
           MYSQL_USER: test_user
           MYSQL_PASSWORD: test_password
@@ -62,7 +62,7 @@ jobs:
       - name: 等待 MySQL 服务就绪
         run: |
           for i in {1..30}; do
-            if mysqladmin ping -h 127.0.0.1 -P 3306 -uroot -proot_password --silent; then
+            if mysqladmin ping -h 127.0.0.1 -P 3306 -uroot -p123456 --silent; then
               echo "MySQL 服务已就绪"
               break
             fi
@@ -75,8 +75,8 @@ jobs:
         env:
           # 传递数据库连接信息给测试环境
           SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/test_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-          SPRING_DATASOURCE_USERNAME: test_user
-          SPRING_DATASOURCE_PASSWORD: test_password
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: 123456
         run: mvn clean test -B  # 只运行单元测试，跳过集成测试
 
       # 步骤 6: 上传测试结果（可选）
