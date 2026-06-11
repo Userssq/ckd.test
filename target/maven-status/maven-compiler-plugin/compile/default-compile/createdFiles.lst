@@ -1,0 +1,5 @@
+com\ckd\test\CkdTestApplication.class
+com\ckd\test\controller\UserController.class
+com\ckd\test\entity\User.class
+com\ckd\test\service\UserService.class
+com\ckd\test\repository\UserRepository.class
