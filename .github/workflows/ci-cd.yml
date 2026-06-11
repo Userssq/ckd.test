@@ -22,7 +22,7 @@ jobs:
     # 服务容器配置 - 自动启动 MySQL
     services:
       mysql:
-        image: mysql:${{ env.MYSQL_VERSION }}
+        image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: 123456
           MYSQL_DATABASE: test_db
@@ -75,8 +75,8 @@ jobs:
         env:
           # 传递数据库连接信息给测试环境
           SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/test_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-          SPRING_DATASOURCE_USERNAME: root
-          SPRING_DATASOURCE_PASSWORD: 123456
+          SPRING_DATASOURCE_USERNAME: test_user
+          SPRING_DATASOURCE_PASSWORD: test_password
         run: mvn clean test -B  # 只运行单元测试，跳过集成测试
 
       # 步骤 6: 上传测试结果（可选）
